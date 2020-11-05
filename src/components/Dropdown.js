@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-const Dropdown = ({ options, selected, onSelectedChange }) => {
+const Dropdown = ({ options, selected, onSelectedChange, label }) => {
     const [open, setOpen] = useState(false);
     const ref = useRef();
     useEffect(() => {
@@ -36,27 +36,36 @@ const Dropdown = ({ options, selected, onSelectedChange }) => {
     });
 
     return (
-        <div ref={ref} className="ui form">
-            <div className="field">
-                <label className="label">Select a color</label>
-                <div
-                    onClick={() => setOpen(!open)}
-                    className={`ui selection dropdown ${
-                        open ? 'visible active' : ''
-                    }`}
-                >
-                    <i className="dropdown icon"></i>
-                    <div className="text">{selected.label}</div>
-                    <div className={`menu ${open ? 'visible transition' : ''}`}>
-                        {renderedOptions}
+        <>
+            <div ref={ref} className="ui form">
+                <div className="field">
+                    <label className="label">{label}</label>
+                    <div
+                        onClick={() => setOpen(!open)}
+                        className={`ui selection dropdown ${
+                            open ? 'visible active' : ''
+                        }`}
+                    >
+                        <i className="dropdown icon"></i>
+                        <div className="text">{selected.label}</div>
+                        <div
+                            className={`menu ${
+                                open ? 'visible transition' : ''
+                            }`}
+                        >
+                            {renderedOptions}
+                        </div>
                     </div>
                 </div>
             </div>
-            <span Style={`Color: ${selected.value} `}>
+
+            <div Style={`Color: ${selected.value} `}>
                 this text is {selected.value}
-            </span>
-        </div>
+            </div>
+        </>
     );
 };
 
 export default Dropdown;
+
+// The code below was for dropdown widget

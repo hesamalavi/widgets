@@ -1,22 +1,25 @@
 import React, { useState } from 'react';
-// import Accordion from './components/Accordion';
-// import Search from './components/Search';
+import Accordion from './components/Accordion';
 import Dropdown from './components/Dropdown';
+import Search from './components/Search';
+import Translate from './components/Translate';
+import Route from './components/Route';
+import Header from './components/Header';
 
-// const items = [
-//     {
-//         title: 'What is React',
-//         content: 'React is a JS framework',
-//     },
-//     {
-//         title: 'how do we use React',
-//         content: 'Love it',
-//     },
-//     {
-//         title: 'How do you use React',
-//         content: 'By creating components',
-//     },
-// ];
+const items = [
+    {
+        title: 'What is React',
+        content: 'React is a JS framework',
+    },
+    {
+        title: 'how do we use React',
+        content: 'Love it',
+    },
+    {
+        title: 'How do you use React',
+        content: 'By creating components',
+    },
+];
 
 const options = [
     {
@@ -35,19 +38,27 @@ const options = [
 
 const App = () => {
     const [selected, setSelected] = useState(options[0]);
-    const [showDropdown, setShowDropdown] = useState(true);
+    // const [showDropdown, setShowDropdown] = useState(true);
     return (
         <div>
-            <button onClick={() => setShowDropdown(!showDropdown)}>
-                Toggle Dropdown
-            </button>
-            {showDropdown ? (
+            <Header />
+            <Route path="/">
+                <Accordion items={items} />
+            </Route>
+            <Route path="/list">
+                <Search />
+            </Route>
+            <Route path="/dropdown">
                 <Dropdown
+                    label="Select a Color"
                     selected={selected}
                     onSelectedChange={setSelected}
                     options={options}
                 />
-            ) : null}
+            </Route>
+            <Route path="/translate">
+                <Translate />
+            </Route>
         </div>
     );
 };
